@@ -8,3 +8,10 @@ exports.User = `
     role: String
   }
 `;
+
+exports.RoleEnum = `
+  enum RoleEnum {
+    ADMIN
+    USER
+  }
+`;
