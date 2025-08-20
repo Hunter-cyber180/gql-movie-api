@@ -33,3 +33,11 @@ exports.LoginInput = `
     password: String
   }
 `;
+
+exports.AuthResult = `
+  type AuthResult {
+    token: String
+    message: String
+    user: User
+  }
+`;
