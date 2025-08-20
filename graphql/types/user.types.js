@@ -15,3 +15,13 @@ exports.RoleEnum = `
     USER
   }
 `;
+
+exports.RegisterInput = `
+  input RegisterInput {
+    name: String!
+    email: String!
+    phoneNumber: Int!
+    password: String!
+    role: RoleEnum!
+  }
+`;
