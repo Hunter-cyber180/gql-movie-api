@@ -3,6 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { ApolloServer } = require("apollo-server-express");
 
+// ** ---- DotEnv ----
+require("dotenv").config();
+
 
 // * Create App
 const app = express();
@@ -14,6 +17,6 @@ mongoose.connection.once("open", () => {
 });
 
 // * ---- Listening ----
-app.listen(3000, "127.0.0.1", () =>
-    console.log(`Server running on localhost:3000`)
+app.listen(process.env.PORT, "127.0.0.1", () =>
+    console.log(`Server running on localhost:${process.env.PORT}`)
 );
