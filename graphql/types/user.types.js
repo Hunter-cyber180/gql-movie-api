@@ -25,3 +25,11 @@ exports.RegisterInput = `
     role: RoleEnum!
   }
 `;
+
+exports.LoginInput = `
+  input LoginInput @oneOf {
+    email: String         
+    phoneNumber: Int   
+    password: String
+  }
+`;
