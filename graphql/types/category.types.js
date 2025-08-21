@@ -6,3 +6,10 @@ exports.Category = `
     movies: [Movie]
   }
 `;
+
+exports.CategoryInput = `
+  input CategoryInput {
+    title: String
+    icon: String 
+  }
+`;
