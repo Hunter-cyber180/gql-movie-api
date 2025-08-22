@@ -12,3 +12,5 @@ const MovieSchema = new Schema({
     trailerSrc: { type: String, required: true },
     views: { type: Number, required: true }
 });
+
+module.exports = mongoose.model("Movie", MovieSchema);
