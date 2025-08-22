@@ -12,3 +12,5 @@ const WatchListSchema = new Schema({
     user: { type: mongoose.Types.ObjectId, ref: "User", required: true },
     movies: [WatchListMoviesSchema],
 }, { timestamps: true });
+
+module.exports = mongoose.model("WatchList", WatchListSchema);
