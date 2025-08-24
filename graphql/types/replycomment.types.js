@@ -9,3 +9,14 @@ exports.ReplyComment = `
     dislikes: Number
   }
 `;
+
+exports.ReplyCommentInput = `
+  input ReplyCommentInput {
+    user: ID,
+    movie: ID,
+    comment: ID,
+    body: String,
+    likes: Number,
+    dislikes: Number
+  }
+`;
