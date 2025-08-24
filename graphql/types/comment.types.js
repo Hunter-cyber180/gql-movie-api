@@ -8,3 +8,13 @@ exports.Comment = `
     dislikes: Number
   }
 `;
+
+exports.CategoryInput = `
+  input CommentInput {
+    user: ID
+    movie: ID 
+    body: String,
+    likes: Number,
+    dislikes: Number
+  }
+`;
