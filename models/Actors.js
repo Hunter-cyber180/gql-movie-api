@@ -8,3 +8,5 @@ const ActorSchema = new Schema({
     PlaceOfBirth: { type: String, required: true },
     ProfileImageURL: { type: String, default: null }
 }, { timestamps: true });
+
+module.exports = mongoose.model("Actor", ActorSchema);
