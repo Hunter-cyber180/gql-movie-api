@@ -9,3 +9,14 @@ exports.Article = `
     dislikes: Number
   }
 `;
+
+exports.ArticleInput = `
+  input ArticleInput {
+    author: ID,
+    imageSrc: String,
+    title: String,
+    body: String,
+    likes: Number,
+    dislikes: Number
+  }
+`;
