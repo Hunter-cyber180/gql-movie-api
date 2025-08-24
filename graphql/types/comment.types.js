@@ -1,8 +1,8 @@
 exports.Comment = `
   type Category {
     _id: ID      
-    user: ID
-    movie: ID 
+    user: User
+    movie: Movie
     body: String,
     likes: Number,
     dislikes: Number
