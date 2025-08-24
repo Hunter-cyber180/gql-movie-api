@@ -9,7 +9,7 @@ exports.Comment = `
   }
 `;
 
-exports.CategoryInput = `
+exports.CommentInput = `
   input CommentInput {
     user: ID
     movie: ID 
