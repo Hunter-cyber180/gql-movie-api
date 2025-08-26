@@ -10,8 +10,11 @@ const addLike = async (_, args, context) => {
     return await LikeModel.create({ user, food });
 }
 
+const deleteLike = async ({ id: _id }) => await LikeModel.findOneAndDelete({ _id });
+
 module.exports = {
     likes,
     like,
     addLike,
+    deleteLike,
 };
