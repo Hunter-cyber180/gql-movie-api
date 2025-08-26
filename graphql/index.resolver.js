@@ -6,6 +6,8 @@ const RootResolvers = {
     Query: {
         categories: categoryResolvers.categories,
         category: categoryResolvers.category,
+        likes: likeResolvers.likes,
+        like: likeResolvers.like,
     },
 
     Mutation: {
