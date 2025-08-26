@@ -9,6 +9,10 @@ const RootResolvers = {
     },
 
     Mutation: {
+        // * Category mutations
+        addCategory: categoryResolvers.addCategory,
+        editCategory: categoryResolvers.editCategory,
+        deleteCategory: categoryResolvers.deleteCategory,
     },
 };
 
