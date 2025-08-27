@@ -1,5 +1,5 @@
 // * ---- Models ----
-const ActorModel = require("../../models/Actors");
+const ActorModel = require("../../models/Actor");
 
 const actors = async () => await ActorModel.find({});
 
