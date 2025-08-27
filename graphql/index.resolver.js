@@ -22,6 +22,11 @@ const RootResolvers = {
         // * Like mutations
         addLike: likeResolvers.addLike,
         deleteLike: likeResolvers.deleteLike,
+
+        // * Article mutations
+        addArticle: articleResolvers.addArticle,
+        editArticle: articleResolvers.editArticle,
+        deleteArticle: articleResolvers.deleteArticle,
     },
 };
 
