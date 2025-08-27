@@ -1,6 +1,7 @@
 // * ---- Resolvers ----
 const likeResolvers = require("./resolvers/like.resolvers");
 const categoryResolvers = require("./resolvers/category.resolvers");
+const articleResolvers = require("./resolvers/article.resolvers");
 
 const RootResolvers = {
     Query: {
@@ -8,6 +9,8 @@ const RootResolvers = {
         category: categoryResolvers.category,
         likes: likeResolvers.likes,
         like: likeResolvers.like,
+        articles: articleResolvers.articles,
+        article: articleResolvers.article,
     },
 
     Mutation: {
