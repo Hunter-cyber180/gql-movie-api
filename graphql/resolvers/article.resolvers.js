@@ -22,9 +22,12 @@ const editArticle = async ({ id: _id }, args, context) => {
     );
 }
 
+const deleteArticle = async ({ id: _id }) => await ArticleModel.findOneAndDelete({ _id });
+
 module.exports = {
     articles,
     article,
     addArticle,
     editArticle,
+    deleteArticle,
 };
