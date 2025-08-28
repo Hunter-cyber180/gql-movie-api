@@ -5,7 +5,16 @@ const actors = async () => await ActorModel.find({});
 
 const actor = async ({ id: _id }) => await ActorModel.findOne({ _id });
 
+const addActor = async (_, args, context) => {
+    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
+    // TODO => check user role
+    return await ActorModel.create(
+        { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
+    );
+}
+
 module.exports = {
     actors,
     actor,
+    addActor,
 };
