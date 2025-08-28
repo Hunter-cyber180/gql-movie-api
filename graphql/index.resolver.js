@@ -30,6 +30,11 @@ const RootResolvers = {
         addArticle: articleResolvers.addArticle,
         editArticle: articleResolvers.editArticle,
         deleteArticle: articleResolvers.deleteArticle,
+
+        // * Actors mutations
+        addActor: actorResolvers.addActor,
+        editActor: actorResolvers.editActor,
+        deleteActor: actorResolvers.deleteActor,
     },
 };
 
