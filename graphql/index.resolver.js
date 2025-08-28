@@ -38,6 +38,10 @@ const RootResolvers = {
         addActor: actorResolvers.addActor,
         editActor: actorResolvers.editActor,
         deleteActor: actorResolvers.deleteActor,
+
+        // * Comment mutations
+        addComment: commentResolvers.addComment,
+        deleteComment: commentResolvers.deleteComment,
     },
 };
 
