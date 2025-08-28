@@ -13,8 +13,18 @@ const addActor = async (_, args, context) => {
     );
 }
 
+const editActor = async ({ id: _id }, args, context) => {
+    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
+    // TODO => check user role
+    return await ActorModel.findOneAndUpdate(
+        { _id },
+        { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
+    );
+}
+
 module.exports = {
     actors,
     actor,
     addActor,
+    editActor,
 };
