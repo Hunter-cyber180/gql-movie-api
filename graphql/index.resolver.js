@@ -2,6 +2,7 @@
 const likeResolvers = require("./resolvers/like.resolvers");
 const categoryResolvers = require("./resolvers/category.resolvers");
 const articleResolvers = require("./resolvers/article.resolvers");
+const actorResolvers = require("./resolvers/actor.resolvers");
 
 const RootResolvers = {
     Query: {
@@ -11,6 +12,8 @@ const RootResolvers = {
         like: likeResolvers.like,
         articles: articleResolvers.articles,
         article: articleResolvers.article,
+        actors: actorResolvers.actors,
+        actor: actorResolvers.actor,
     },
 
     Mutation: {
