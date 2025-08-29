@@ -3,9 +3,40 @@ const MovieModel = require("../../models/Movie");
 
 const movies = async () => await MovieModel.find({});
 
-const movie = async ({ id: _id }) => await  MovieModel.findOne({ _id });
+const movie = async ({ id: _id }) => await MovieModel.findOne({ _id });
+
+const addMovie = async (_, args) => {
+    const {
+        name,
+        desc,
+        src,
+        releaseYear,
+        duration,
+        genres,
+        director,
+        trailerSrc,
+        views,
+        country,
+        rating
+    } = args;
+    // TODO => check user role
+    return await MovieModel.create({
+        name,
+        desc,
+        src,
+        releaseYear,
+        duration,
+        genres,
+        director,
+        trailerSrc,
+        views,
+        country,
+        rating
+    });
+};
 
 module.exports = {
     movies,
     movie,
+    addMovie,
 };
