@@ -12,8 +12,14 @@ const addReplyComment = async (_, args) => {
     );
 };
 
+const deleteReplyComment = async ({ id: _id }) => {
+    // TODO => check user role
+    await ReplyCommentModel.findOneAndDelete({ _id });
+}
+
 module.exports = {
     replyComments,
     replyComment,
-    addReplyComment
+    addReplyComment,
+    deleteReplyComment,
 };
