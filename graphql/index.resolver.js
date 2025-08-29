@@ -45,6 +45,10 @@ const RootResolvers = {
         // * Comment mutations
         addComment: commentResolvers.addComment,
         deleteComment: commentResolvers.deleteComment,
+
+        // * ReplyComment mutations
+        addReplyComment: replyCommentResolvers.addReplyComment,
+        deleteReplyComment: replyCommentResolvers.deleteReplyComment,
     },
 };
 
