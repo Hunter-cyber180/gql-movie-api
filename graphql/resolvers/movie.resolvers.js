@@ -35,8 +35,40 @@ const addMovie = async (_, args) => {
     });
 };
 
+const editMovie = async ({ id: _id }, args, context) => {
+    const {
+        name,
+        desc,
+        src,
+        releaseYear,
+        duration,
+        genres,
+        director,
+        trailerSrc,
+        views,
+        country,
+        rating
+    } = args;
+    // TODO => check user role
+    return await MovieModel.findOneAndUpdate(
+        { _id }, {
+        name,
+        desc,
+        src,
+        releaseYear,
+        duration,
+        genres,
+        director,
+        trailerSrc,
+        views,
+        country,
+        rating
+    });
+}
+
 module.exports = {
     movies,
     movie,
     addMovie,
+    editMovie,
 };
