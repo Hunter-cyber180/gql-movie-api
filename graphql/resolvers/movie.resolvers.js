@@ -66,9 +66,15 @@ const editMovie = async ({ id: _id }, args, context) => {
     });
 }
 
+const deleteMovie = async ({ id: _id }) => {
+    // TODO => check user role
+    await MovieModel.findOneAndDelete({ _id });
+}
+
 module.exports = {
     movies,
     movie,
     addMovie,
     editMovie,
+    deleteMovie,
 };
