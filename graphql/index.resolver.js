@@ -52,6 +52,11 @@ const RootResolvers = {
         // * ReplyComment mutations
         addReplyComment: replyCommentResolvers.addReplyComment,
         deleteReplyComment: replyCommentResolvers.deleteReplyComment,
+
+        // * Movie mutations
+        addMovie: movieResolvers.addMovie,
+        editMovie: movieResolvers.editMovie,
+        deleteMovie: movieResolvers.deleteMovie,
     },
 };
 
