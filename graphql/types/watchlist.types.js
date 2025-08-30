@@ -32,3 +32,10 @@ exports.WatchListInput = `#graphql
     movies: [WatchListMovieInput]
   }
 `;
+
+exports.UpdateWatchListInput = `#graphql
+  input UpdateWatchListInput {
+    name: String
+    movies: [WatchListMovieInput]
+  }
+`;
