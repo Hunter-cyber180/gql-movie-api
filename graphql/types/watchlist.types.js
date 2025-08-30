@@ -16,3 +16,11 @@ exports.WatchListMovieType = `#graphql
     watched: Boolean!
   }
 `;
+
+exports.WatchListMovieInput = `#graphql
+  input WatchListMovieInput {
+    movieID: ID!
+    addedAt: String
+    watched: Boolean
+  }
+`;
