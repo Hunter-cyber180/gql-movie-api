@@ -8,3 +8,11 @@ exports.WatchListType = `#graphql
     updatedAt: String!
   }
 `;
+
+exports.WatchListMovieType = `#graphql
+  type WatchListMovieType {
+    movieID: Movie!
+    addedAt: String!
+    watched: Boolean!
+  }
+`;
