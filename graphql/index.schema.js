@@ -40,6 +40,8 @@ module.exports = `#graphql
     }
 
     type Mutation {
-
+        addCategory(input: CategoryInput!): Category
+        editCategory(input: CategoryInput!): Category
+        deleteCategory(id: ID!): Category
     }
 `;
