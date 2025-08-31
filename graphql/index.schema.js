@@ -45,5 +45,7 @@ module.exports = `#graphql
         addCategory(input: CategoryInput!): Category
         editCategory(input: CategoryInput!): Category
         deleteCategory(id: ID!): Category
+        register(input: RegisterInput!): AuthResult
+        login(input: LoginInput!): AuthResult
     }
 `;
