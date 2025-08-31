@@ -53,5 +53,7 @@ module.exports = `#graphql
         login(input: LoginInput!): AuthResult
         addLike(input: LikeInput!): Like
         deleteLike(id: ID!): Like
+        addComment(input: CommentInput!): Comment
+        deleteComment(id: ID!): Comment
     }
 `;
