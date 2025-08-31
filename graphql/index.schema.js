@@ -35,9 +35,10 @@ module.exports = `#graphql
     ${watchListTypes.UpdateWatchListInput}
 
     type Query {
-
+        categories: [Category!]!
+        category(id: ID!): Category
     }
-   
+
     type Mutation {
 
     }
