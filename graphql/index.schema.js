@@ -3,6 +3,7 @@ const categoryTypes = require("./types/category.types");
 const likeTypes = require("./types/like.types");
 const commentTypes = require("./types/comment.types");
 const replyCommentTypes = require("./types/replycomment.types");
+const movieTypes = require("./types/movie.types");
 
 module.exports = `#graphql
     ${articleTypes.Article}
@@ -15,6 +16,8 @@ module.exports = `#graphql
     ${commentTypes.CommentInput}
     ${replyCommentTypes.ReplyComment}
     ${replyCommentTypes.ReplyCommentInput}
+    ${movieTypes.Movie}
+    ${movieTypes.MovieInput}
 
     type Query {
 
