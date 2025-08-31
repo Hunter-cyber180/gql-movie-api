@@ -6,6 +6,7 @@ const replyCommentTypes = require("./types/replycomment.types");
 const movieTypes = require("./types/movie.types");
 const actorTypes = require("./types/actor.types");
 const userTypes = require("./types/user.types");
+const watchListTypes = require("./types/watchlist.types");
 
 module.exports = `#graphql
     ${articleTypes.Article}
@@ -27,6 +28,11 @@ module.exports = `#graphql
     ${userTypes.RegisterInput}
     ${userTypes.User}
     ${userTypes.RoleEnum}
+    ${watchListTypes.WatchListInput}
+    ${watchListTypes.WatchListType}
+    ${watchListTypes.WatchListMovieInput}
+    ${watchListTypes.WatchListMovieType}
+    ${watchListTypes.UpdateWatchListInput}
 
     type Query {
 
