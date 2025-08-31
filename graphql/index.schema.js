@@ -5,6 +5,7 @@ const commentTypes = require("./types/comment.types");
 const replyCommentTypes = require("./types/replycomment.types");
 const movieTypes = require("./types/movie.types");
 const actorTypes = require("./types/actor.types");
+const userTypes = require("./types/user.types");
 
 module.exports = `#graphql
     ${articleTypes.Article}
@@ -21,6 +22,11 @@ module.exports = `#graphql
     ${movieTypes.MovieInput}
     ${actorTypes.Actor}
     ${actorTypes.ActorInput}
+    ${userTypes.AuthResult}
+    ${userTypes.LoginInput}
+    ${userTypes.RegisterInput}
+    ${userTypes.User}
+    ${userTypes.RoleEnum}
 
     type Query {
 
