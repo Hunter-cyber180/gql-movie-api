@@ -81,5 +81,7 @@ module.exports = `#graphql
         addWatchList(input: WatchListInput!): WatchListType
         editWatchList(input: UpdateWatchListInput!): WatchListType
         deleteWatchList(id: ID!): WatchListType
+        addWatchListMovie(input: WatchListMovieInput!): WatchListMovieType
+        deleteWatchListMovie(id: ID!): WatchListMovieType
     }
 `;
