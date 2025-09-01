@@ -71,5 +71,8 @@ module.exports = `#graphql
         addMovie(input: MovieInput!): Movie
         editMovie(input: MovieInput!): Movie
         deleteMovie(id: ID!): Movie
+        addArticle(input: ArticleInput!): Article
+        editArticle(input: ArticleInput!): Article
+        deleteArticle(id: ID!): Article
     }
 `;
