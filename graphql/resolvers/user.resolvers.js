@@ -30,4 +30,23 @@ const registerUser = async (_, { input }) => {
     return { token, user };
 }
 
-module.exports = { registerUser, };
+const loginUser = async (_, { input }) => {
+    // TODO => validate user data
+
+    const user = await UserModel.findOne({
+        $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
+    });
+    if (!user) throw new Error("Invalid credentials");
+
+    const validPassword = await bcrypt.compare(input.password, user.password);
+    if (!validPassword) throw new Error("Invalid credentials");
+
+    const token = jwt.sign(
+        { id: user._id },
+        process.env.TOKEN_KEY,
+        { expiresIn: "2d" }
+    );
+    return { token, user };
+}
+
+module.exports = { registerUser, loginUser };
