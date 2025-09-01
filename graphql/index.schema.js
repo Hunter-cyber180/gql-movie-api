@@ -76,5 +76,8 @@ module.exports = `#graphql
         addArticle(input: ArticleInput!): Article
         editArticle(input: ArticleInput!): Article
         deleteArticle(id: ID!): Article
+        addWatchList(input: WatchListInput!): WatchListType
+        editWatchList(input: UpdateWatchListInput!): WatchListType
+        deleteWatchList(id: ID!): WatchListType
     }
 `;
