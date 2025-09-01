@@ -67,7 +67,7 @@ module.exports = `#graphql
         deleteLike(id: ID!): Like
         addComment(input: CommentInput!): Comment
         deleteComment(id: ID!): Comment
-        addReplyComment(input: ReplyCommentInput): ReplyComment
+        addReplyComment(input: ReplyCommentInput!): ReplyComment
         deleteReplyComment(id: ID!): ReplyComment
         addActor(input: ActorInput!): Actor
         editActor(input: ActorInput!): Actor
