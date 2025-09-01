@@ -43,6 +43,8 @@ module.exports = `#graphql
         like(id: ID!): Like
         comments: [Comment!]!
         comment(id: ID!): Comment
+        replyComments: [ReplyComment!]!
+        replyComment(id: ID!): ReplyComment
     }
 
     type Mutation {
