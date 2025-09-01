@@ -53,6 +53,8 @@ module.exports = `#graphql
         article(id: ID!): Article
         watchLists: [WatchListType!]!
         watchList(id: ID!): WatchListType
+        watchListMovies: [WatchListMovieType!]!
+        WatchListMovie(id: ID!): WatchListMovieType
     }
 
     type Mutation {
