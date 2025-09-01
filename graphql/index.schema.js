@@ -66,5 +66,8 @@ module.exports = `#graphql
         addActor(input: ActorInput!): Actor
         editActor(input: ActorInput!): Actor
         deleteActor(id: ID!): Actor
+        addMovie(input: MovieInput!): Movie
+        editMovie(input: MovieInput!): Movie
+        deleteMovie(id: ID!): Movie
     }
 `;
