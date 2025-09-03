@@ -64,6 +64,7 @@ const RootResolvers = {
         // * Users mutations
         registerUser: userResolvers.registerUser,
         loginUser: userResolvers.loginUser,
+        deleteUser: userResolvers.deleteUser,
     },
 };
 
