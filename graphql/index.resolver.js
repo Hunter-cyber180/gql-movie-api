@@ -24,6 +24,8 @@ const RootResolvers = {
         replyComment: replyCommentResolvers.replyComment,
         movies: movieResolvers.movies,
         movie: movieResolvers.movie,
+        users: userResolvers.users,
+        user: userResolvers.user,
     },
 
     Mutation: {
