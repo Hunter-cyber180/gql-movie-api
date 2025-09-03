@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 
 const users = async () => await UserModel.find({});
 
+const user = async ({ id: _id }) => await UserModel.findOne({ _id });
+
 const registerUser = async (_, { input }) => {
     // TODO => validate user data
 
@@ -51,4 +53,4 @@ const loginUser = async (_, { input }) => {
     return { token, user };
 }
 
-module.exports = { registerUser, loginUser, users };
+module.exports = { registerUser, loginUser, users, user };
