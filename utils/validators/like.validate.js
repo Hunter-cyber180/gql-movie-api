@@ -19,3 +19,7 @@ const likeSchema = new Schema({
         }
     },
 });
+
+module.exports = {
+    likeValidator: (object) => likeSchema.validate(object),
+};
