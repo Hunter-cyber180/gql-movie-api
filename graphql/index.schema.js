@@ -63,6 +63,7 @@ module.exports = `#graphql
         deleteCategory(id: ID!): Category
         register(input: RegisterInput!): AuthResult
         login(input: LoginInput!): AuthResult
+        deleteUser(id: ID!): User
         addLike(input: LikeInput!): Like
         deleteLike(id: ID!): Like
         addComment(input: CommentInput!): Comment
