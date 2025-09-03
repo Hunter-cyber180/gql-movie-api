@@ -5,6 +5,8 @@ const UserModel = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const users = async () => await UserModel.find({});
+
 const registerUser = async (_, { input }) => {
     // TODO => validate user data
 
@@ -49,4 +51,4 @@ const loginUser = async (_, { input }) => {
     return { token, user };
 }
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, users };
