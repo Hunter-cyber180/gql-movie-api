@@ -9,6 +9,11 @@ const users = async () => await UserModel.find({});
 
 const user = async ({ id: _id }) => await UserModel.findOne({ _id });
 
+const deleteUser = async ({ id: _id }) => {
+    // TODO => check user role
+    await UserModel.findOneAndDelete({ _id });
+}
+
 const registerUser = async (_, { input }) => {
     // TODO => validate user data
 
@@ -53,4 +58,4 @@ const loginUser = async (_, { input }) => {
     return { token, user };
 }
 
-module.exports = { registerUser, loginUser, users, user };
+module.exports = { registerUser, loginUser, users, user, deleteUser };
