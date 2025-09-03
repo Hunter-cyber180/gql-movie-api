@@ -6,6 +6,7 @@ const actorResolvers = require("./resolvers/actor.resolvers");
 const commentResolvers = require("./resolvers/comment.resolvers");
 const replyCommentResolvers = require("./resolvers/replycomment.resolvers");
 const movieResolvers = require("./resolvers/movie.resolvers");
+const userResolvers = require("./resolvers/user.resolvers");
 
 const RootResolvers = {
     Query: {
@@ -57,6 +58,10 @@ const RootResolvers = {
         addMovie: movieResolvers.addMovie,
         editMovie: movieResolvers.editMovie,
         deleteMovie: movieResolvers.deleteMovie,
+
+        // * Users mutations
+        registerUser: userResolvers.registerUser,
+        loginUser: userResolvers.loginUser,
     },
 };
 
