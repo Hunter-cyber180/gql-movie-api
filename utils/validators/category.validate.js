@@ -12,3 +12,7 @@ const categorySchema = new Schema({
         message: "Icon is required!",
     },
 });
+
+module.exports = {
+    categoryValidator: (object) => categorySchema.validate(object),
+};
