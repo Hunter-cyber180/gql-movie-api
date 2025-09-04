@@ -47,4 +47,14 @@ const movieSchema = new Schema({
         required: false,
         message: "Rating must be a number!",
     },
+    genres: {
+        type: Array,
+        required: true,
+        message: "Genres are required!",
+        each: {
+            type: String,
+            required: true,
+            message: "Each genre must be a non-empty string!"
+        }
+    }
 });
