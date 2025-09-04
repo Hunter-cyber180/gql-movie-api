@@ -37,4 +37,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Trailer src is required!",
     },
+    country: {
+        type: String,
+        required: false,
+        message: "Country must be a string!",
+    },
 });
