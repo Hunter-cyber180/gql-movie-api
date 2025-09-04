@@ -58,3 +58,7 @@ const movieSchema = new Schema({
         }
     }
 });
+
+module.exports = {
+    movieValidator: (object) => movieSchema.validate(object),
+};
