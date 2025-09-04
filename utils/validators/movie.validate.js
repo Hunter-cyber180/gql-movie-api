@@ -12,4 +12,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Description is required!",
     },
+    src: {
+        type: String,
+        required: true,
+        message: "Src is required!",
+    },
 });
