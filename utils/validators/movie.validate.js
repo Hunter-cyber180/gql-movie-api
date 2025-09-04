@@ -27,4 +27,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Duration is required!",
     },
+    director: {
+        type: String,
+        required: true,
+        message: "Director is required!",
+    },
 });
