@@ -10,7 +10,7 @@ const MovieSchema = new Schema({
     genres: [{ type: String, required: true }],
     director: { type: String, required: true },
     trailerSrc: { type: String, required: true },
-    views: { type: Number, required: true },
+    views: { type: Number, default: 0 },
     country: { type: String, default: null },
     rating: { type: Number, default: null }
 }, { timestamps: true });
