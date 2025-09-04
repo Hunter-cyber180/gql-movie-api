@@ -32,4 +32,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Director is required!",
     },
+    trailerSrc: {
+        type: String,
+        required: true,
+        message: "Trailer src is required!",
+    },
 });
