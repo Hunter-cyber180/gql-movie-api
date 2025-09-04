@@ -7,4 +7,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Name is required!",
     },
+    desc: {
+        type: String,
+        required: true,
+        message: "Description is required!",
+    },
 });
