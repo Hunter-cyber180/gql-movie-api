@@ -17,4 +17,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Src is required!",
     },
+    releaseYear: {
+        type: Number,
+        required: true,
+        message: "Release year is required!",
+    },
 });
