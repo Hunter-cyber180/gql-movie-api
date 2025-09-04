@@ -42,4 +42,9 @@ const movieSchema = new Schema({
         required: false,
         message: "Country must be a string!",
     },
+    rating: {
+        type: Number,
+        required: false,
+        message: "Rating must be a number!",
+    },
 });
