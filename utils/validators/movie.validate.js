@@ -22,4 +22,9 @@ const movieSchema = new Schema({
         required: true,
         message: "Release year is required!",
     },
+    duration: {
+        type: Number,
+        required: true,
+        message: "Duration is required!",
+    },
 });
