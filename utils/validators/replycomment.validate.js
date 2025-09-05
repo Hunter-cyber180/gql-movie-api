@@ -17,4 +17,12 @@ const replyCommentSchema = new Schema({
             message: "movieID must be a valid MongoDB ObjectId!"
         }
     },
+    comment: {
+        type: String,
+        required: true,
+        validate: {
+            validator: (v) => mongoose.Types.ObjectId.isValid(v),
+            message: "commentID must be a valid MongoDB ObjectId!"
+        }
+    },
 });
