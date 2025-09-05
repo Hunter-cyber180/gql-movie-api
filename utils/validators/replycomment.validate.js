@@ -25,4 +25,9 @@ const replyCommentSchema = new Schema({
             message: "commentID must be a valid MongoDB ObjectId!"
         }
     },
+    body: {
+        type: String,
+        required: true,
+        message: "Body is required!",
+    },
 });
