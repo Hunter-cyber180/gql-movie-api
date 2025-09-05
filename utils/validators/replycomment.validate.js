@@ -41,3 +41,7 @@ const replyCommentSchema = new Schema({
         message: "Dislikes must be a number!",
     },
 });
+
+module.exports = {
+    replyCommentValidator: (object) => replyCommentSchema.validate(object),
+};
