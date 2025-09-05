@@ -17,4 +17,9 @@ const commentSchema = new Schema({
             message: "movieID must be a valid MongoDB ObjectId!"
         }
     },
+    body: {
+        type: String,
+        required: true,
+        message: "Body is required!",
+    },
 });
