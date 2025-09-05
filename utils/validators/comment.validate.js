@@ -33,3 +33,7 @@ const commentSchema = new Schema({
         message: "Dislikes must be a number!",
     },
 });
+
+module.exports = {
+    commentValidator: (object) => commentSchema.validate(object),
+};
