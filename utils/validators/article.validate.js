@@ -24,4 +24,9 @@ const articleSchema = new Schema({
         required: true,
         message: "Body is required!",
     },
+    likes: {
+        type: Number,
+        required: false,
+        message: "likes must be a number!",
+    },
 });
