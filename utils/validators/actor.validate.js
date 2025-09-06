@@ -27,3 +27,7 @@ const actorSchema = new Schema({
         message: "Profile image URL is required!",
     },
 });
+
+module.exports = {
+    actorValidator: (object) => actorSchema.validate(object),
+};
