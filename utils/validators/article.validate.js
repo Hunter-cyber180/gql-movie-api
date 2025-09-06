@@ -14,4 +14,9 @@ const articleSchema = new Schema({
         required: false,
         message: "Image src must be a string!",
     },
+    title: {
+        type: String,
+        required: true,
+        message: "Title is required!",
+    },
 });
