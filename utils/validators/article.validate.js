@@ -29,4 +29,9 @@ const articleSchema = new Schema({
         required: false,
         message: "likes must be a number!",
     },
+    dislikes: {
+        type: Number,
+        required: false,
+        message: "Dislikes must be a number!",
+    },
 });
