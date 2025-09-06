@@ -19,4 +19,9 @@ const articleSchema = new Schema({
         required: true,
         message: "Title is required!",
     },
+    body: {
+        type: String,
+        required: true,
+        message: "Body is required!",
+    },
 });
