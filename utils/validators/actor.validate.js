@@ -21,4 +21,9 @@ const actorSchema = new Schema({
         required: true,
         message: "Place of birth is required!",
     },
+    ProfileImageURL: {
+        type: String,
+        required: true,
+        message: "Profile image URL is required!",
+    },
 });
