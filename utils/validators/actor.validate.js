@@ -6,4 +6,9 @@ const actorSchema = new Schema({
         required: true,
         message: "Fullname is required!",
     },
+    bio: {
+        type: String,
+        required: false,
+        message: "Bio must be a string!",
+    },
 });
