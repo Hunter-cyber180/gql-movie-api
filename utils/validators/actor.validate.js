@@ -11,4 +11,9 @@ const actorSchema = new Schema({
         required: false,
         message: "Bio must be a string!",
     },
+    DateOfBirth: {
+        type: Date,
+        required: true,
+        message: "Date of birth is required!",
+    },
 });
