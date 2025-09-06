@@ -9,4 +9,9 @@ const articleSchema = new Schema({
             message: "authorID must be a valid MongoDB ObjectId!"
         }
     },
+    imageSrc: {
+        type: String,
+        required: false,
+        message: "Image src must be a string!",
+    },
 });
