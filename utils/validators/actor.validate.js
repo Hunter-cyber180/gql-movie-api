@@ -16,4 +16,9 @@ const actorSchema = new Schema({
         required: true,
         message: "Date of birth is required!",
     },
+    PlaceOfBirth: {
+        type: String,
+        required: true,
+        message: "Place of birth is required!",
+    },
 });
