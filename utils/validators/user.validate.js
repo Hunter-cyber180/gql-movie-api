@@ -12,4 +12,10 @@ const registerSchema = new Schema({
         match: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
         message: "Email is not valid!",
     },
+    password: {
+        type: String,
+        required: true,
+        match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+        message: "Password is not strong!",
+    },
 });
