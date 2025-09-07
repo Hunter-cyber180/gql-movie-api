@@ -25,3 +25,7 @@ const registerSchema = new Schema({
         message: "phoneNumber is not valid!",
     },
 });
+
+module.exports = {
+    registerValidator: (object) => registerSchema.validate(object),
+};
