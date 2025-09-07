@@ -26,6 +26,15 @@ const registerSchema = new Schema({
     },
 });
 
+const loginSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        match: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+        message: "Email is not valid!",
+    },
+});
+
 module.exports = {
     registerValidator: (object) => registerSchema.validate(object),
 };
