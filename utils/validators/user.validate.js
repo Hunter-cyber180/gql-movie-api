@@ -49,4 +49,5 @@ const loginSchema = new Schema({
 
 module.exports = {
     registerValidator: (object) => registerSchema.validate(object),
+    loginValidator: (object) => loginSchema.validate(object),
 };
