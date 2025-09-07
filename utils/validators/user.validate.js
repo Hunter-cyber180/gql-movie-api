@@ -18,4 +18,10 @@ const registerSchema = new Schema({
         match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
         message: "Password is not strong!",
     },
+    phoneNumber: {
+        type: String,
+        required: true,
+        match: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        message: "phoneNumber is not valid!",
+    },
 });
