@@ -35,3 +35,7 @@ const articleSchema = new Schema({
         message: "Dislikes must be a number!",
     },
 });
+
+module.exports = {
+    articleValidator: (object) => articleSchema.validate(object),
+};
