@@ -54,6 +54,7 @@ const editMovie = async ({ id: _id }, args, context) => {
         rating
     } = args;
     // TODO => check user role
+    await movieValidator(context.req);
     return await MovieModel.findOneAndUpdate(
         { _id }, {
         name,
