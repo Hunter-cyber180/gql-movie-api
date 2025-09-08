@@ -20,6 +20,7 @@ const addArticle = async (_, args, context) => {
 const editArticle = async ({ id: _id }, args, context) => {
     const { author, imageSrc, title, body, likes, dislikes } = args;
     // TODO => check user role (the author of article)
+    await articleValidator(context.req);
     return await ArticleModel.findOneAndUpdate(
         { _id },
         { author, imageSrc, title, body, likes, dislikes }
