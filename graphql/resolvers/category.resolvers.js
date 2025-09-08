@@ -1,6 +1,9 @@
 // * ---- Models ----
 const CategoryModel = require("../../models/Category");
 
+// * ---- Utils ----
+const { categoryValidator } = require("../../utils/validators/category.validate");
+
 const categories = async () => await CategoryModel.find({});
 
 const category = async ({ id: _id }) => await CategoryModel.findOne({ _id });
@@ -8,6 +11,7 @@ const category = async ({ id: _id }) => await CategoryModel.findOne({ _id });
 const addCategory = async (_, args, context) => {
     const { title, icon } = args;
     // TODO => check user role
+    await categoryValidator(context.req);
     return await CategoryModel.create({ title, icon });
 }
 
