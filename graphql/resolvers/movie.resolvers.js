@@ -1,11 +1,14 @@
 // * ---- Models ----
 const MovieModel = require("../../models/Movie");
 
+// * ---- Utils ----
+const { movieValidator } = require("../../utils/validators/movie.validate");
+
 const movies = async () => await MovieModel.find({});
 
 const movie = async ({ id: _id }) => await MovieModel.findOne({ _id });
 
-const addMovie = async (_, args) => {
+const addMovie = async (_, args, context) => {
     const {
         name,
         desc,
@@ -20,6 +23,7 @@ const addMovie = async (_, args) => {
         rating
     } = args;
     // TODO => check user role
+    await movieValidator(context.req);
     return await MovieModel.create({
         name,
         desc,
