@@ -32,3 +32,15 @@ const authValidator = async (req) => {
         throw error;
     }
 };
+
+const adminValidator = async (request) => {
+    const { role } = await authValidator(request);
+    if (role !== "ADMIN")
+        throw new Error("You don't have access!");
+}
+
+module.exports = {
+    authValidator,
+    adminValidator,
+};
+
