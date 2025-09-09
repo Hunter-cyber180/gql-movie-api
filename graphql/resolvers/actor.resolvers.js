@@ -21,7 +21,7 @@ const addActor = async (_, args, context) => {
 
 const editActor = async ({ id: _id }, args, context) => {
     const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
-    // TODO => check user role
+    await adminValidator(context.req);
     await actorValidator(context.req);
     return await ActorModel.findOneAndUpdate(
         { _id },
