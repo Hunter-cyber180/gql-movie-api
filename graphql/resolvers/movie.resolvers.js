@@ -3,6 +3,7 @@ const MovieModel = require("../../models/Movie");
 
 // * ---- Utils ----
 const { movieValidator } = require("../../utils/validators/movie.validate");
+const { adminValidator } = require("../../utils/auth");
 
 const movies = async () => await MovieModel.find({});
 
@@ -22,7 +23,7 @@ const addMovie = async (_, args, context) => {
         country,
         rating
     } = args;
-    // TODO => check user role
+    await adminValidator(context.req);
     await movieValidator(context.req);
     return await MovieModel.create({
         name,
