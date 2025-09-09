@@ -17,7 +17,7 @@ const addCategory = async (_, args, context) => {
 
 const editCategory = async ({ id: _id }, args, context) => {
     const { title, icon } = args;
-    // TODO => check user role
+    await adminValidator(context.req);
     await categoryValidator(context.req);
     return await CategoryModel.findOneAndUpdate({ _id }, { title, icon });
 }
