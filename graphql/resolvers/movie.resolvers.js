@@ -73,7 +73,7 @@ const editMovie = async ({ id: _id }, args, context) => {
 }
 
 const deleteMovie = async ({ id: _id }) => {
-    // TODO => check user role
+    await adminValidator(context.req);
     await MovieModel.findOneAndDelete({ _id });
 }
 
