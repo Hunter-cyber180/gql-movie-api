@@ -22,7 +22,10 @@ const editCategory = async ({ id: _id }, args, context) => {
     return await CategoryModel.findOneAndUpdate({ _id }, { title, icon });
 }
 
-const deleteCategory = async ({ id: _id }) => await CategoryModel.findOneAndDelete({ _id });
+const deleteCategory = async ({ id: _id }, args, context) => {
+    await adminValidator(context.req);
+    return await CategoryModel.findOneAndDelete({ _id });
+}
 
 module.exports = {
     categories,
