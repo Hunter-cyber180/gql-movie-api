@@ -3,6 +3,8 @@ const ActorModel = require("../../models/Actor");
 
 // * ---- Utils ----
 const { actorValidator } = require("../../utils/validators/actor.validate");
+const { adminValidator } = require("../../utils/auth");
+
 
 const actors = async () => await ActorModel.find({});
 
@@ -10,7 +12,7 @@ const actor = async ({ id: _id }) => await ActorModel.findOne({ _id });
 
 const addActor = async (_, args, context) => {
     const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
-    // TODO => check user role
+    await adminValidator(context.req);
     await actorValidator(context.req);
     return await ActorModel.create(
         { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
