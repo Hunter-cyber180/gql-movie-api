@@ -29,7 +29,10 @@ const editActor = async ({ id: _id }, args, context) => {
     );
 }
 
-const deleteActor = async ({ id: _id }) => await ActorModel.findOneAndDelete({ _id });
+const deleteActor = async ({ id: _id }) => {
+    await adminValidator(context.req);
+    return await ActorModel.findOneAndDelete({ _id });
+}
 
 module.exports = {
     actors,
