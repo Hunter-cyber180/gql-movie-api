@@ -8,10 +8,13 @@ const articles = async () => await ArticleModel.find({});
 
 const article = async ({ id: _id }) => await ArticleModel.findOne({ _id });
 
-const addArticle = async (_, args, context) => {
-    const { author, imageSrc, title, body, likes, dislikes } = args;
+const addArticle = async (_, { input }, context) => {
+    const { author, imageSrc, title, body, likes, dislikes } = input;
     // TODO => check user role (the author of article)
-    await articleValidator(context.req);
+
+    const validateError = articleValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await ArticleModel.create({
         author, imageSrc, title, body, likes, dislikes
     });
