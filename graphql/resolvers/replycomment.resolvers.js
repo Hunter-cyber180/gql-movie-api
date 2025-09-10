@@ -3,7 +3,7 @@ const ReplyCommentModel = require("../../models/ReplyComment");
 
 // * ---- Utils ----
 const { replyCommentValidator } = require("../../utils/validators/replycomment.validate");
-const { authValidator } = require("../../utils/auth");
+const { authValidator, adminValidator } = require("../../utils/auth");
 
 const replyComments = async () => await ReplyCommentModel.find({});
 
@@ -19,7 +19,7 @@ const addReplyComment = async (_, args, context) => {
 };
 
 const deleteReplyComment = async ({ id: _id }) => {
-    // TODO => check user role
+    await adminValidator(context.req);
     await ReplyCommentModel.findOneAndDelete({ _id });
 }
 
