@@ -9,9 +9,13 @@ const categories = async () => await CategoryModel.find({});
 
 const category = async ({ id: _id }) => await CategoryModel.findOne({ _id });
 
-const addCategory = async (_, args, context) => {
-    const { title, icon } = args;
+const addCategory = async (_, { input }, context) => {
+    const { title, icon } = input;
     await adminValidator(context.req);
+
+    const validateError = categoryValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await CategoryModel.create({ title, icon });
 }
 
