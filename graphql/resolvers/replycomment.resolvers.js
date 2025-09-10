@@ -9,10 +9,13 @@ const replyComments = async () => await ReplyCommentModel.find({});
 
 const replyComment = async ({ id: _id }) => await ReplyCommentModel.findOne({ _id });
 
-const addReplyComment = async (_, args, context) => {
-    const { user, movie, comment, body, likes, dislikes } = args;
+const addReplyComment = async (_, { input }, context) => {
+    const { user, movie, comment, body, likes, dislikes } = input;
     await authValidator(context.req);
-    await replyCommentValidator(context.req);
+
+    const validateError = replyCommentValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await ReplyCommentModel.create(
         { user, movie, comment, body, likes, dislikes }
     );
