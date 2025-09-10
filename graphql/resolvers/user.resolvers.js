@@ -5,6 +5,11 @@ const UserModel = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// * ---- Utils ----
+const { registerValidator, loginValidator } = require(
+    "../../utils/validators/user.validate"
+);
+
 const users = async () => await UserModel.find({});
 
 const user = async ({ id: _id }) => await UserModel.findOne({ _id });
@@ -15,7 +20,8 @@ const deleteUser = async ({ id: _id }) => {
 }
 
 const registerUser = async (_, { input }) => {
-    // TODO => validate user data
+    const validateError = registerValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
 
     const existingUser = await UserModel.findOne({
         $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
