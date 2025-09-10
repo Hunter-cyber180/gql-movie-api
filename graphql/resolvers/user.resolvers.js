@@ -46,7 +46,8 @@ const registerUser = async (_, { input }) => {
 }
 
 const loginUser = async (_, { input }) => {
-    // TODO => validate user data
+    const validateError = loginValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
 
     const user = await UserModel.findOne({
         $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
