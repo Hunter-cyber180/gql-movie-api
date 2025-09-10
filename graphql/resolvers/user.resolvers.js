@@ -9,13 +9,14 @@ const jwt = require("jsonwebtoken");
 const { registerValidator, loginValidator } = require(
     "../../utils/validators/user.validate"
 );
+const { adminValidator } = require("../../utils/auth");
 
 const users = async () => await UserModel.find({});
 
 const user = async ({ id: _id }) => await UserModel.findOne({ _id });
 
 const deleteUser = async ({ id: _id }) => {
-    // TODO => check user role
+    await adminValidator(context.req);
     await UserModel.findOneAndDelete({ _id });
 }
 
