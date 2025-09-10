@@ -20,10 +20,13 @@ const addArticle = async (_, { input }, context) => {
     });
 }
 
-const editArticle = async ({ id: _id }, args, context) => {
-    const { author, imageSrc, title, body, likes, dislikes } = args;
+const editArticle = async ({ id: _id }, { input }, context) => {
+    const { author, imageSrc, title, body, likes, dislikes } = input;
     // TODO => check user role (the author of article)
-    await articleValidator(context.req);
+
+    const validateError = articleValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await ArticleModel.findOneAndUpdate(
         { _id },
         { author, imageSrc, title, body, likes, dislikes }
