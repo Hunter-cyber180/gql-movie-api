@@ -43,7 +43,7 @@ const addMovie = async (_, { input }, context) => {
     });
 };
 
-const editMovie = async ({ id: _id }, args, context) => {
+const editMovie = async ({ id: _id }, { input }, context) => {
     const {
         name,
         desc,
@@ -56,9 +56,12 @@ const editMovie = async ({ id: _id }, args, context) => {
         views,
         country,
         rating
-    } = args;
+    } = input;
     await adminValidator(context.req);
-    await movieValidator(context.req);
+
+    const validateError = movieValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await MovieModel.findOneAndUpdate(
         { _id }, {
         name,
