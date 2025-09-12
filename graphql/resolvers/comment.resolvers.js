@@ -8,9 +8,12 @@ const comments = async () => await CommentModel.find({});
 
 const comment = async ({ id: _id }) => await CommentModel.findOne({ _id });
 
-const addComment = async (_, args, context) => {
-    const { user, movie, body, likes, dislikes } = args;
-    await commentValidator(context.req);
+const addComment = async (_, { input }, context) => {
+    const { user, movie, body, likes, dislikes } = input;
+
+    const validateError = commentValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await CommentModel.create({ user, movie, body, likes, dislikes });
 };
 
