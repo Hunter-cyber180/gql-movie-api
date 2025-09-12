@@ -22,10 +22,13 @@ const addActor = async (_, { input }, context) => {
     );
 }
 
-const editActor = async ({ id: _id }, args, context) => {
-    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
+const editActor = async ({ id: _id }, { input }, context) => {
+    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
     await adminValidator(context.req);
-    await actorValidator(context.req);
+
+    const validateError = actorValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await ActorModel.findOneAndUpdate(
         { _id },
         { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
