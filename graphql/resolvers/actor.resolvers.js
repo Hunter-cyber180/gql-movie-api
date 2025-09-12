@@ -10,10 +10,13 @@ const actors = async () => await ActorModel.find({});
 
 const actor = async ({ id: _id }) => await ActorModel.findOne({ _id });
 
-const addActor = async (_, args, context) => {
-    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = args;
+const addActor = async (_, { input }, context) => {
+    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
     await adminValidator(context.req);
-    await actorValidator(context.req);
+
+    const validateError = actorValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await ActorModel.create(
         { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
     );
