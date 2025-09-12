@@ -8,9 +8,12 @@ const likes = async () => await LikeModel.find({});
 
 const like = async ({ id: _id }) => await LikeModel.findOne({ _id });
 
-const addLike = async (_, args, context) => {
-    const { user, food } = args;
-    await likeValidator(context.req);
+const addLike = async (_, { input }, context) => {
+    const { user, food } = input;
+
+    const validateError = likeValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await LikeModel.create({ user, food });
 }
 
