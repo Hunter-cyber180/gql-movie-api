@@ -9,7 +9,7 @@ const movies = async () => await MovieModel.find({});
 
 const movie = async ({ id: _id }) => await MovieModel.findOne({ _id });
 
-const addMovie = async (_, args, context) => {
+const addMovie = async (_, { input }, context) => {
     const {
         name,
         desc,
@@ -22,9 +22,12 @@ const addMovie = async (_, args, context) => {
         views,
         country,
         rating
-    } = args;
+    } = input;
     await adminValidator(context.req);
-    await movieValidator(context.req);
+
+    const validateError = movieValidator(input)[0]?.message;
+    if (validateError) throw new Error(validateError);
+
     return await MovieModel.create({
         name,
         desc,
