@@ -3,6 +3,7 @@ const CommentModel = require("../../models/Comment");
 
 // * ---- Utils ----
 const { commentValidator } = require("../../utils/validators/comment.validate");
+const { adminValidator } = require("../../utils/auth");
 
 const comments = async () => await CommentModel.find({});
 
@@ -18,7 +19,7 @@ const addComment = async (_, { input }, context) => {
 };
 
 const deleteComment = async ({ id: _id }) => {
-    // TODO => check user role
+    await adminValidator(context.req);
     await CommentModel.findOneAndDelete({ _id });
 }
 
