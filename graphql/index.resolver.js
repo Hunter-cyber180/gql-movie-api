@@ -76,6 +76,9 @@ const RootResolvers = {
         user: async (parent) => UserModel.find({ _id: parent.user }),
         movie: async (parent) => MovieModel.find({ _id: parent.movie }),
     },
+    Article: {
+        author: async (parent) => UserModel.find({ _id: parent.author })
+    }
 };
 
 module.exports = RootResolvers;
