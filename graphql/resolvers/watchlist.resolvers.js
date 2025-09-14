@@ -65,10 +65,40 @@ const deleteWatchList = async ({ id: _id }) => {
     }
 };
 
+const addMovieToWatchList = async ({ id: _id }, args) => {
+    try {
+        const watchList = await WatchList.findById(_id);
+        if (!watchList)
+            throw new Error("Watchlist not found");
+
+        const movieExists = watchList.movies.some(
+            (movie) => movie.movieID.toString() === args.movieId
+        );
+
+        if (movieExists)
+            throw new Error("Movie already exists in watchlist");
+
+        watchList.movies.push({
+            movieID: movieId,
+            addedAt: new Date(),
+            watched: false,
+        });
+
+        const updatedWatchList = await watchList.save();
+        return await WatchList.populate(updatedWatchList, [
+            { path: "user", select: "name email" },
+            { path: "movies.movieID", select: "name director releaseYear" },
+        ]);
+    } catch (error) {
+        throw new Error(`Error adding movie to watchlist: ${error.message}`);
+    }
+};
+
 module.exports = {
     addWatchList,
     getWatchListsByUser,
     getWatchListById,
     updateWatchList,
-    deleteWatchList
+    deleteWatchList,
+    addMovieToWatchList,
 };
