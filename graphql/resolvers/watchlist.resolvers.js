@@ -53,9 +53,22 @@ const updateWatchList = async ({ id: _id }, { input }) => {
     }
 };
 
+const deleteWatchList = async ({ id: _id }) => {
+    try {
+        const deletedWatchList = await WatchList.findByIdAndDelete(_id);
+        if (!deletedWatchList)
+            throw new Error("Watchlist not found");
+
+        return { message: "Watchlist deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting watchlist: ${error.message}`);
+    }
+};
+
 module.exports = {
     addWatchList,
     getWatchListsByUser,
     getWatchListById,
     updateWatchList,
+    deleteWatchList
 };
