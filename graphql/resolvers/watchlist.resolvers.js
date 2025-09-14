@@ -9,6 +9,18 @@ const addWatchList = async (_, { input }) => {
     }
 };
 
+const getWatchListsByUser = async (_, { input }) => {
+    try {
+        const watchLists = await WatchList.find({ user: input.user })
+            .populate("user", "username email")
+            .populate("movies.movieID", "name director releaseYear");
+        return watchLists;
+    } catch (error) {
+        throw new Error(`Error fetching watchlists: ${error.message}`);
+    }
+};
+
 module.exports = {
     addWatchList,
+    getWatchListsByUser
 };
