@@ -20,7 +20,22 @@ const getWatchListsByUser = async (_, { input }) => {
     }
 };
 
+const getWatchListById = async ({ id: _id }) => {
+    try {
+        const watchList = await WatchList.findById(_id)
+            .populate("user", "username email")
+            .populate("movies.movieID", "name director releaseYear");
+        if (!watchList) {
+            throw new Error("Watchlist not found");
+        }
+        return watchList;
+    } catch (error) {
+        throw new Error(`Error fetching watchlist: ${error.message}`);
+    }
+};
+
 module.exports = {
     addWatchList,
-    getWatchListsByUser
+    getWatchListsByUser,
+    getWatchListById,
 };
