@@ -1,10 +1,13 @@
 const WatchList = require("../../models/WatchList");
 
+// Create a new watchlist with the provided input data
 const addWatchList = async (_, { input }) => {
     try {
+        // create new watchlist
         const watchList = new WatchList(input);
         return await watchList.save();
     } catch (error) {
+        // throw error if an error occurs when creating a new object
         throw new Error(`Error creating watchlist: ${error.message}`);
     }
 };
