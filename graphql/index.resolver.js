@@ -78,6 +78,10 @@ const RootResolvers = {
     },
     Article: {
         author: async (parent) => UserModel.find({ _id: parent.author })
+    },
+    Comment: {
+        user: async (parent) => UserModel.find({ _id: parent.user }),
+        movie: async (parent) => MovieModel.find({ _id: parent.movie }),
     }
 };
 
