@@ -12,7 +12,7 @@ const addWatchList = async (_, { input }) => {
 const getWatchListsByUser = async (_, { input }) => {
     try {
         const watchLists = await WatchList.find({ user: input.user })
-            .populate("user", "username email")
+            .populate("user", "name email")
             .populate("movies.movieID", "name director releaseYear");
         return watchLists;
     } catch (error) {
@@ -23,7 +23,7 @@ const getWatchListsByUser = async (_, { input }) => {
 const getWatchListById = async ({ id: _id }) => {
     try {
         const watchList = await WatchList.findById(_id)
-            .populate("user", "username email")
+            .populate("user", "name email")
             .populate("movies.movieID", "name director releaseYear");
         if (!watchList) {
             throw new Error("Watchlist not found");
@@ -41,7 +41,7 @@ const updateWatchList = async ({ id: _id }, { input }) => {
             input,
             { new: true, runValidators: true }
         )
-            .populate("user", "username email")
+            .populate("user", "name email")
             .populate("movies.movieID", "name director releaseYear");
 
         if (!updatedWatchList) {
