@@ -46,19 +46,22 @@ const getWatchListById = async ({ id: _id }) => {
     }
 };
 
+// Update a watchlist by ID with provided data and return the updated document
 const updateWatchList = async ({ id: _id }, { input }) => {
     try {
+        // Find and update watchlist, return the modified document
         const updatedWatchList = await WatchList.findByIdAndUpdate(
             _id,
             input,
-            { new: true, runValidators: true }
+            { new: true, runValidators: true } // Return updated doc and validate data
         )
-            .populate("user", "name email")
-            .populate("movies.movieID", "name director releaseYear");
+            .populate("user", "name email") // Include user details
+            .populate("movies.movieID", "name director releaseYear"); // Include movie info
 
-        if (!updatedWatchList) {
+        // Handle case where watchlist doesn't exist
+        if (!updatedWatchList)
             throw new Error("Watchlist not found");
-        }
+
         return updatedWatchList;
     } catch (error) {
         throw new Error(`Error updating watchlist: ${error.message}`);
