@@ -34,8 +34,28 @@ const getWatchListById = async ({ id: _id }) => {
     }
 };
 
+const updateWatchList = async ({ id: _id }, { input }) => {
+    try {
+        const updatedWatchList = await WatchList.findByIdAndUpdate(
+            _id,
+            input,
+            { new: true, runValidators: true }
+        )
+            .populate("user", "username email")
+            .populate("movies.movieID", "name director releaseYear");
+
+        if (!updatedWatchList) {
+            throw new Error("Watchlist not found");
+        }
+        return updatedWatchList;
+    } catch (error) {
+        throw new Error(`Error updating watchlist: ${error.message}`);
+    }
+};
+
 module.exports = {
     addWatchList,
     getWatchListsByUser,
     getWatchListById,
+    updateWatchList,
 };
