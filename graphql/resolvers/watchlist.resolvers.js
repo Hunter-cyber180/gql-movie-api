@@ -12,13 +12,16 @@ const addWatchList = async (_, { input }) => {
     }
 };
 
+// Fetch all watchlists for a specific user with populated user and movie data
 const getWatchListsByUser = async (_, args) => {
     try {
+        // get the watchlists and return the data
         const watchLists = await WatchList.find({ user: args.user })
             .populate("user", "name email")
             .populate("movies.movieID", "name director releaseYear");
         return watchLists;
     } catch (error) {
+        // throw error if an error occurs when fetching the watchlists
         throw new Error(`Error fetching watchlists: ${error.message}`);
     }
 };
