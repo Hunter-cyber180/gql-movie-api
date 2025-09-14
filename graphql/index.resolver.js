@@ -1,6 +1,7 @@
 // * ---- Models ----
 const UserModel = require("../models/User");
 const MovieModel = require("../models/Movie");
+const CommentModel = require("../models/Comment");
 
 // * ---- Resolvers ----
 const likeResolvers = require("./resolvers/like.resolvers");
@@ -82,7 +83,12 @@ const RootResolvers = {
     Comment: {
         user: async (parent) => UserModel.find({ _id: parent.user }),
         movie: async (parent) => MovieModel.find({ _id: parent.movie }),
-    }
+    },
+    ReplyComment: {
+        user: async (parent) => UserModel.find({ _id: parent.user }),
+        movie: async (parent) => MovieModel.find({ _id: parent.movie }),
+        comment: async (parent) => CommentModel.find({ _id: parent.comment }),
+    },
 };
 
 module.exports = RootResolvers;
