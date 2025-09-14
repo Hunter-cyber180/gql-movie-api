@@ -85,12 +85,15 @@ const deleteWatchList = async ({ id: _id }) => {
     }
 };
 
+// Add a movie to a watchlist with validation and return populated result
 const addMovieToWatchList = async ({ id: _id }, args) => {
     try {
+        // Find the target watchlist
         const watchList = await WatchList.findById(_id);
         if (!watchList)
             throw new Error("Watchlist not found");
 
+        // Check if movie already exists in the watchlist
         const movieExists = watchList.movies.some(
             (movie) => movie.movieID.toString() === args.movieId
         );
@@ -98,12 +101,14 @@ const addMovieToWatchList = async ({ id: _id }, args) => {
         if (movieExists)
             throw new Error("Movie already exists in watchlist");
 
+        // Add new movie to watchlist with current timestamp
         watchList.movies.push({
-            movieID: movieId,
+            movieID: args.movieId,
             addedAt: new Date(),
             watched: false,
         });
 
+        // Save changes and populate related data
         const updatedWatchList = await watchList.save();
         return await WatchList.populate(updatedWatchList, [
             { path: "user", select: "name email" },
