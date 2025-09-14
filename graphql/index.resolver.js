@@ -1,3 +1,7 @@
+// * ---- Models ----
+const UserModel = require("../models/User");
+const MovieModel = require("../models/Movie");
+
 // * ---- Resolvers ----
 const likeResolvers = require("./resolvers/like.resolvers");
 const categoryResolvers = require("./resolvers/category.resolvers");
@@ -65,6 +69,12 @@ const RootResolvers = {
         registerUser: userResolvers.registerUser,
         loginUser: userResolvers.loginUser,
         deleteUser: userResolvers.deleteUser,
+    },
+
+
+    Like: {
+        user: async (parent) => UserModel.find({ _id: parent.user }),
+        movie: async (parent) => MovieModel.find({ _id: parent.movie }),
     },
 };
 
