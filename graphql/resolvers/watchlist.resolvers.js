@@ -9,9 +9,9 @@ const addWatchList = async (_, { input }) => {
     }
 };
 
-const getWatchListsByUser = async (_, { input }) => {
+const getWatchListsByUser = async (_, args) => {
     try {
-        const watchLists = await WatchList.find({ user: input.user })
+        const watchLists = await WatchList.find({ user: args.user })
             .populate("user", "name email")
             .populate("movies.movieID", "name director releaseYear");
         return watchLists;
