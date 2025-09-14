@@ -34,7 +34,7 @@ const getWatchListById = async ({ id: _id }) => {
         const watchList = await WatchList.findById(_id)
             .populate("user", "name email") // Basic user info
             .populate("movies.movieID", "name director releaseYear"); // Movie details
-        
+
         // Handle case where watchlist doesn't exist
         if (!watchList)
             throw new Error("Watchlist not found");
@@ -68,12 +68,17 @@ const updateWatchList = async ({ id: _id }, { input }) => {
     }
 };
 
+// Delete a watchlist by ID and return a success message
 const deleteWatchList = async ({ id: _id }) => {
     try {
+        // Find and delete the watchlist document
         const deletedWatchList = await WatchList.findByIdAndDelete(_id);
+
+        // Handle case where watchlist doesn't exist
         if (!deletedWatchList)
             throw new Error("Watchlist not found");
 
+        // Return success confirmation
         return { message: "Watchlist deleted successfully" };
     } catch (error) {
         throw new Error(`Error deleting watchlist: ${error.message}`);
