@@ -1,3 +1,4 @@
+// * ----- Models -----
 const WatchList = require("../../models/WatchList");
 
 // Create a new watchlist with the provided input data
@@ -26,16 +27,21 @@ const getWatchListsByUser = async (_, args) => {
     }
 };
 
+// Get a specific watchlist by ID with populated user and movie details
 const getWatchListById = async ({ id: _id }) => {
     try {
+        // Find watchlist and populate related data
         const watchList = await WatchList.findById(_id)
-            .populate("user", "name email")
-            .populate("movies.movieID", "name director releaseYear");
-        if (!watchList) {
+            .populate("user", "name email") // Basic user info
+            .populate("movies.movieID", "name director releaseYear"); // Movie details
+        
+        // Handle case where watchlist doesn't exist
+        if (!watchList)
             throw new Error("Watchlist not found");
-        }
+
         return watchList;
     } catch (error) {
+        // throw error if an error occurs when fetching the watchlist
         throw new Error(`Error fetching watchlist: ${error.message}`);
     }
 };
