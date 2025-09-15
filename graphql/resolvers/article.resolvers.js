@@ -13,7 +13,14 @@ const articles = async () => {
     }
 };
 
-const article = async ({ id: _id }) => await ArticleModel.findOne({ _id });
+const article = async ({ id: _id }) => {
+    try {
+        const article = await ArticleModel.findOne({ _id });
+        return article;
+    } catch (error) {
+        throw new Error(`Error fetching article: ${error.message}`);
+    }
+}
 
 const addArticle = async (_, { input }, context) => {
     const { author, imageSrc, title, body, likes, dislikes } = input;
