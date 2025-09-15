@@ -14,7 +14,17 @@ const categories = async () => {
     }
 }
 
-const category = async ({ id: _id }) => await CategoryModel.findOne({ _id });
+const category = async ({ id: _id }) => {
+    try {
+        const category = await CategoryModel.findOne({ _id });
+        if (!category)
+            throw new Error("Category not found");
+
+        return category;
+    } catch (error) {
+        throw new Error(`Error fetching category: ${error.message}`);
+    }
+}
 
 const addCategory = async (_, { input }, context) => {
     const { title, icon } = input;
