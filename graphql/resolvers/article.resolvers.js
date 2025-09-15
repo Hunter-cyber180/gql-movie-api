@@ -40,16 +40,20 @@ const addArticle = async (_, { input }, context) => {
 }
 
 const editArticle = async ({ id: _id }, { input }, context) => {
-    const { author, imageSrc, title, body, likes, dislikes } = input;
-    // TODO => check user role (the author of article)
+    try {
+        const { author, imageSrc, title, body, likes, dislikes } = input;
+        // TODO => check user role (the author of article)
 
-    const validateError = articleValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = articleValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await ArticleModel.findOneAndUpdate(
-        { _id },
-        { author, imageSrc, title, body, likes, dislikes }
-    );
+        return await ArticleModel.findOneAndUpdate(
+            { _id },
+            { author, imageSrc, title, body, likes, dislikes }
+        );
+    } catch (error) {
+        throw new Error(`Error updating article: ${error.message}`);
+    }
 }
 
 const deleteArticle = async ({ id: _id }) => await ArticleModel.findOneAndDelete({ _id });
