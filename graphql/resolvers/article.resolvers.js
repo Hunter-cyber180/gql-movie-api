@@ -56,7 +56,17 @@ const editArticle = async ({ id: _id }, { input }, context) => {
     }
 }
 
-const deleteArticle = async ({ id: _id }) => await ArticleModel.findOneAndDelete({ _id });
+const deleteArticle = async ({ id: _id }) => {
+    try {
+        const article = await ArticleModel.findOneAndDelete({ _id });
+        if (!article)
+            throw new Error("Article not found");
+
+        return { message: "Article deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting article: ${error.message}`);
+    }
+}
 
 module.exports = {
     articles,
