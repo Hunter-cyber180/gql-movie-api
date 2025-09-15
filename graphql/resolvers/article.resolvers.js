@@ -23,15 +23,20 @@ const article = async ({ id: _id }) => {
 }
 
 const addArticle = async (_, { input }, context) => {
-    const { author, imageSrc, title, body, likes, dislikes } = input;
-    // TODO => check user role (the author of article)
+    try {
+        const { author, imageSrc, title, body, likes, dislikes } = input;
+        // TODO => check user role (the author of article)
 
-    const validateError = articleValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = articleValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await ArticleModel.create({
-        author, imageSrc, title, body, likes, dislikes
-    });
+        const newArticle = new ArticleModel({
+            author, imageSrc, title, body, likes, dislikes
+        });
+        return await newArticle.save();
+    } catch (error) {
+        throw new Error(`Error creating article: ${error.message}`);
+    }
 }
 
 const editArticle = async ({ id: _id }, { input }, context) => {
