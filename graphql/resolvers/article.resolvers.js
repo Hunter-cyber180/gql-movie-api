@@ -4,7 +4,14 @@ const ArticleModel = require("../../models/Article");
 // * ---- Utils ----
 const { articleValidator } = require("../../utils/validators/article.validate");
 
-const articles = async () => await ArticleModel.find({});
+const articles = async () => {
+    try {
+        const articles = await ArticleModel.find({});
+        return articles;
+    } catch (error) {
+        throw new Error(`Error fetching articles: ${error.message}`);
+    }
+};
 
 const article = async ({ id: _id }) => await ArticleModel.findOne({ _id });
 
