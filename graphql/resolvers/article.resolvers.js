@@ -16,6 +16,9 @@ const articles = async () => {
 const article = async ({ id: _id }) => {
     try {
         const article = await ArticleModel.findOne({ _id });
+        if (!article)
+            throw new Error("Article not found");
+
         return article;
     } catch (error) {
         throw new Error(`Error fetching article: ${error.message}`);
