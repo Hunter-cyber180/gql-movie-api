@@ -145,12 +145,15 @@ const removeMovieFromWatchList = async ({ id: _id }, args) => {
     }
 };
 
+// Updates the watched status of a movie in a user's watchlist
 const updateMovieWatchedStatus = async ({ id: _id }, args) => {
     try {
+        // Find the watchlist by ID
         const watchList = await WatchList.findById(_id);
         if (!watchList)
             throw new Error("Watchlist not found");
 
+        // Find the specific movie in the watchlist
         const movie = watchList.movies.find(
             (item) => item.movieID.toString() === args.movieId
         );
@@ -158,8 +161,13 @@ const updateMovieWatchedStatus = async ({ id: _id }, args) => {
         if (!movie)
             throw new Error("Movie not found in watchlist");
 
+        // Update the watched status
         movie.watched = args.watched;
+        
+        // Save the updated watchlist
         const updatedWatchList = await watchList.save();
+        
+        // Populate user and movie details before returning
         return await WatchList.populate(updatedWatchList, [
             { path: "user", select: "name email" },
             { path: "movies.movieID", select: "name director releaseYear" },
