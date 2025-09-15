@@ -5,7 +5,14 @@ const CategoryModel = require("../../models/Category");
 const { categoryValidator } = require("../../utils/validators/category.validate");
 const { adminValidator } = require("../../utils/auth");
 
-const categories = async () => await CategoryModel.find({});
+const categories = async () => {
+    try {
+        const categories = await CategoryModel.find({});
+        return categories;
+    } catch (error) {
+        throw new Error(`Error fetching categories: ${error.message}`);
+    }
+}
 
 const category = async ({ id: _id }) => await CategoryModel.findOne({ _id });
 
