@@ -119,17 +119,23 @@ const addMovieToWatchList = async ({ id: _id }, args) => {
     }
 };
 
+// Removes a movie from a user's watchlist
 const removeMovieFromWatchList = async ({ id: _id }, args) => {
     try {
+        // Find the watchlist by ID
         const watchList = await WatchList.findById(_id);
         if (!watchList)
             throw new Error("Watchlist not found");
 
+        // Filter out the movie to be removed
         watchList.movies = watchList.movies.filter(
             (movie) => movie.movieID.toString() !== args.movieId
         );
 
+        // Save the updated watchlist
         const updatedWatchList = await watchList.save();
+
+        // Populate user and movie details before returning
         return await WatchList.populate(updatedWatchList, [
             { path: "user", select: "name email" },
             { path: "movies.movieID", select: "name director releaseYear" },
