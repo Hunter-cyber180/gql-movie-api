@@ -27,13 +27,18 @@ const category = async ({ id: _id }) => {
 }
 
 const addCategory = async (_, { input }, context) => {
-    const { title, icon } = input;
-    await adminValidator(context.req);
+    try {
+        const { title, icon } = input;
+        await adminValidator(context.req);
 
-    const validateError = categoryValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = categoryValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await CategoryModel.create({ title, icon });
+        const newCategory = new CategoryModel({ title, icon });
+        return await newCategory.save();
+    } catch (error) {
+        throw new Error(`Error Creating category: ${error.message}`);
+    }
 }
 
 const editCategory = async ({ id: _id }, { input }, context) => {
