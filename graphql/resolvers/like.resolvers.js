@@ -24,12 +24,17 @@ const like = async ({ id: _id }) => {
 }
 
 const addLike = async (_, { input }, context) => {
-    const { user, food } = input;
+    try {
+        const { user, food } = input;
 
-    const validateError = likeValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = likeValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await LikeModel.create({ user, food });
+        const newLike = new LikeModel({ user, food });
+        return await newLike.save();
+    } catch (error) {
+        throw new Error(`Error creating like: ${error.message}`);
+    }
 }
 
 const deleteLike = async ({ id: _id }) => await LikeModel.findOneAndDelete({ _id });
