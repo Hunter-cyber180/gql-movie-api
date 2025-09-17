@@ -37,7 +37,17 @@ const addLike = async (_, { input }, context) => {
     }
 }
 
-const deleteLike = async ({ id: _id }) => await LikeModel.findOneAndDelete({ _id });
+const deleteLike = async ({ id: _id }) => {
+    try {
+        const like = await LikeModel.findOneAndDelete({ _id });
+        if (!like)
+            throw new Error("Like not found!");
+
+        return { message: "Like deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting like: ${error.message}`);
+    }
+}
 
 module.exports = {
     likes,
