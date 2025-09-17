@@ -42,13 +42,18 @@ const addCategory = async (_, { input }, context) => {
 }
 
 const editCategory = async ({ id: _id }, { input }, context) => {
-    const { title, icon } = input;
-    await adminValidator(context.req);
+    try {
+        const { title, icon } = input;
+        await adminValidator(context.req);
 
-    const validateError = categoryValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = categoryValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await CategoryModel.findOneAndUpdate({ _id }, { title, icon });
+        const updatedCategory = await CategoryModel.findOneAndUpdate({ _id }, { title, icon });
+        return updatedCategory;
+    } catch (error) {
+        throw new Error(`Error updating category: ${error.message}`);
+    }
 }
 
 const deleteCategory = async ({ id: _id }, args, context) => {
