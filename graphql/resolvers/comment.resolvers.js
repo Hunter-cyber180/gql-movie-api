@@ -41,8 +41,16 @@ const addComment = async (_, { input }, context) => {
 };
 
 const deleteComment = async ({ id: _id }) => {
-    await adminValidator(context.req);
-    await CommentModel.findOneAndDelete({ _id });
+    try {
+        await adminValidator(context.req);
+        const comment = CommentModel.findOneAndDelete({ _id });
+        if (!comment)
+            throw new Error("Comment not found!");
+
+        return { message: "Comment deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting comment: ${error.message}`);
+    }
 }
 
 module.exports = {
