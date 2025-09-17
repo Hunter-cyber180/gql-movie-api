@@ -4,7 +4,14 @@ const LikeModel = require("../../models/Like");
 // * ---- Utils ----
 const { likeValidator } = require("../../utils/validators/like.validate");
 
-const likes = async () => await LikeModel.find({});
+const likes = async () => {
+    try {
+        const likes = await LikeModel.find({});
+        return likes;
+    } catch (error) {
+        throw new Error(`Error fetching likes: ${error.message}`);
+    }
+}
 
 const like = async ({ id: _id }) => await LikeModel.findOne({ _id });
 
