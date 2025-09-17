@@ -13,7 +13,15 @@ const likes = async () => {
     }
 }
 
-const like = async ({ id: _id }) => await LikeModel.findOne({ _id });
+const like = async ({ id: _id }) => {
+    try {
+        const like = await LikeModel.findOne({ _id });
+        if (!like)
+            throw new Error("Like not found!")
+    } catch (error) {
+        throw new Error(`Error fetching like: ${error.message}`);
+    }
+}
 
 const addLike = async (_, { input }, context) => {
     const { user, food } = input;
