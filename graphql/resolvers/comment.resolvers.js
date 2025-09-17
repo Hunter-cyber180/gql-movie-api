@@ -27,12 +27,17 @@ const comment = async ({ id: _id }) => {
 }
 
 const addComment = async (_, { input }, context) => {
-    const { user, movie, body, likes, dislikes } = input;
+    try {
+        const { user, movie, body, likes, dislikes } = input;
 
-    const validateError = commentValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = commentValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await CommentModel.create({ user, movie, body, likes, dislikes });
+        const newComment = new CommentModel({ user, movie, body, likes, dislikes });
+        return await newComment.save();
+    } catch (error) {
+        throw new Error(`Error creating comment: ${error.message}`);
+    }
 };
 
 const deleteComment = async ({ id: _id }) => {
