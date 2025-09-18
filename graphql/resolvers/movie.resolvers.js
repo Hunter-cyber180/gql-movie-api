@@ -14,7 +14,17 @@ const movies = async () => {
     }
 }
 
-const movie = async ({ id: _id }) => await MovieModel.findOne({ _id });
+const movie = async ({ id: _id }) => {
+    try {
+        const movie = await MovieModel.findOne({ _id });
+        if (!movie)
+            throw new Error("Movie not found!");
+
+        return movie;
+    } catch (error) {
+        throw new Error(`Error fetching movie: ${error.message}`);
+    }
+}
 
 const addMovie = async (_, { input }, context) => {
     try {
