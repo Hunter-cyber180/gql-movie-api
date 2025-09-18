@@ -5,7 +5,14 @@ const MovieModel = require("../../models/Movie");
 const { movieValidator } = require("../../utils/validators/movie.validate");
 const { adminValidator } = require("../../utils/auth");
 
-const movies = async () => await MovieModel.find({});
+const movies = async () => {
+    try {
+        const movies = await MovieModel.find({});
+        return movies;
+    } catch (error) {
+        throw new Error(`Error fetching movies: ${error.message}`);
+    }
+}
 
 const movie = async ({ id: _id }) => await MovieModel.findOne({ _id });
 
