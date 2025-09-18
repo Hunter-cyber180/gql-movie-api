@@ -15,7 +15,17 @@ const actors = async () => {
     }
 }
 
-const actor = async ({ id: _id }) => await ActorModel.findOne({ _id });
+const actor = async ({ id: _id }) => {
+    try {
+        const actor = await ActorModel.findOne({ _id });
+        if (!actor)
+            throw new Error("Actor not found!");
+
+        return actor;
+    } catch (error) {
+        throw new Error(`Error fetching actor: ${error.message}`);
+    }
+}
 
 const addActor = async (_, { input }, context) => {
     const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
