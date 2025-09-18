@@ -27,15 +27,21 @@ const replyComment = async ({ id: _id }) => {
 }
 
 const addReplyComment = async (_, { input }, context) => {
-    const { user, movie, comment, body, likes, dislikes } = input;
-    await authValidator(context.req);
+    try {
+        const { user, movie, comment, body, likes, dislikes } = input;
+        await authValidator(context.req);
 
-    const validateError = replyCommentValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = replyCommentValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await ReplyCommentModel.create(
-        { user, movie, comment, body, likes, dislikes }
-    );
+        const newReplyComment = new ReplyCommentModel(
+            { user, movie, comment, body, likes, dislikes }
+        );
+
+        return newReplyComment.save();
+    } catch (error) {
+        throw new Error(`Error creating reply comment: ${error.message}`);
+    }
 };
 
 const deleteReplyComment = async ({ id: _id }) => {
