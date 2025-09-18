@@ -46,16 +46,20 @@ const addActor = async (_, { input }, context) => {
 }
 
 const editActor = async ({ id: _id }, { input }, context) => {
-    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
-    await adminValidator(context.req);
+    try {
+        const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
+        await adminValidator(context.req);
 
-    const validateError = actorValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = actorValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await ActorModel.findOneAndUpdate(
-        { _id },
-        { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
-    );
+        return await ActorModel.findOneAndUpdate(
+            { _id },
+            { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
+        );
+    } catch (error) {
+        throw new Error(`Error updating actor: ${error.message}`);
+    }
 }
 
 const deleteActor = async ({ id: _id }) => {
