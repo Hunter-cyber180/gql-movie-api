@@ -6,7 +6,14 @@ const { actorValidator } = require("../../utils/validators/actor.validate");
 const { adminValidator } = require("../../utils/auth");
 
 
-const actors = async () => await ActorModel.find({});
+const actors = async () => {
+    try {
+        const actors = await ActorModel.find({});
+        return actors;
+    } catch (error) {
+        throw new Error(`Error fetching actors: ${error.message}`);
+    }
+}
 
 const actor = async ({ id: _id }) => await ActorModel.findOne({ _id });
 
