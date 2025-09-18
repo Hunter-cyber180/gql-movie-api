@@ -28,15 +28,21 @@ const actor = async ({ id: _id }) => {
 }
 
 const addActor = async (_, { input }, context) => {
-    const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
-    await adminValidator(context.req);
+    try {
+        const { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL } = input;
+        await adminValidator(context.req);
 
-    const validateError = actorValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+        const validateError = actorValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    return await ActorModel.create(
-        { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
-    );
+        const newActor = new ActorModel(
+            { fullname, bio, DateOfBirth, PlaceOfBirth, ProfileImageURL }
+        );
+
+        return await newActor.save();
+    } catch (error) {
+        throw new Error(`Error creating article: ${error.message}`);
+    }
 }
 
 const editActor = async ({ id: _id }, { input }, context) => {
