@@ -14,7 +14,17 @@ const replyComments = async () => {
     }
 }
 
-const replyComment = async ({ id: _id }) => await ReplyCommentModel.findOne({ _id });
+const replyComment = async ({ id: _id }) => {
+    try {
+        const replyComment = await ReplyCommentModel.findOne({ _id });
+        if (!replyComment)
+            throw new Error("Reply comment not found!");
+
+        return replyComment;
+    } catch (error) {
+        throw new Error(`Error fetching reply comment: ${error.message}`);
+    }
+}
 
 const addReplyComment = async (_, { input }, context) => {
     const { user, movie, comment, body, likes, dislikes } = input;
