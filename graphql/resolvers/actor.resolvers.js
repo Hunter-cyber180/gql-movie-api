@@ -63,8 +63,16 @@ const editActor = async ({ id: _id }, { input }, context) => {
 }
 
 const deleteActor = async ({ id: _id }) => {
-    await adminValidator(context.req);
-    return await ActorModel.findOneAndDelete({ _id });
+    try {
+        await adminValidator(context.req);
+        const actor = await ActorModel.findOneAndDelete({ _id });
+        if (!actor)
+            throw new Error("Actor not found!");
+
+        return { message: "Actor deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting actor: ${error.message}`);
+    }
 }
 
 module.exports = {
