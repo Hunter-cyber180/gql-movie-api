@@ -45,8 +45,16 @@ const addReplyComment = async (_, { input }, context) => {
 };
 
 const deleteReplyComment = async ({ id: _id }) => {
-    await adminValidator(context.req);
-    await ReplyCommentModel.findOneAndDelete({ _id });
+    try {
+        await adminValidator(context.req);
+        const replyComment = await ReplyCommentModel.findOneAndDelete({ _id });
+        if (!replyComment)
+            throw new Error("Reply comment not found!");
+
+        return { message: "Reply comment deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting reply comment: ${error.message}`);
+    }
 }
 
 module.exports = {
