@@ -34,17 +34,25 @@ const category = async ({ id: _id }) => {
     }
 }
 
+// Creates and saves a new category in the database
 const addCategory = async (_, { input }, context) => {
     try {
         const { title, icon } = input;
+        
+        // Validate admin privileges from request context
         await adminValidator(context.req);
 
+        // Validate category input data
         const validateError = categoryValidator(input)[0]?.message;
         if (validateError) throw new Error(validateError);
 
+        // Create new category instance
         const newCategory = new CategoryModel({ title, icon });
+        
+        // Save the new category to database and return it
         return await newCategory.save();
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error Creating category: ${error.message}`);
     }
 }
