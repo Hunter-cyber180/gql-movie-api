@@ -38,7 +38,7 @@ const category = async ({ id: _id }) => {
 const addCategory = async (_, { input }, context) => {
     try {
         const { title, icon } = input;
-        
+
         // Validate admin privileges from request context
         await adminValidator(context.req);
 
@@ -48,7 +48,7 @@ const addCategory = async (_, { input }, context) => {
 
         // Create new category instance
         const newCategory = new CategoryModel({ title, icon });
-        
+
         // Save the new category to database and return it
         return await newCategory.save();
     } catch (error) {
@@ -57,17 +57,23 @@ const addCategory = async (_, { input }, context) => {
     }
 }
 
+// Updates an existing category with new data
 const editCategory = async ({ id: _id }, { input }, context) => {
     try {
         const { title, icon } = input;
+
+        // Validate admin privileges before proceeding
         await adminValidator(context.req);
 
+        // Validate the input data using categoryValidator
         const validateError = categoryValidator(input)[0]?.message;
         if (validateError) throw new Error(validateError);
 
+        // Find the category by ID and update it with new values
         const updatedCategory = await CategoryModel.findOneAndUpdate({ _id }, { title, icon });
         return updatedCategory;
     } catch (error) {
+        // Catch any errors and throw with a descriptive message
         throw new Error(`Error updating category: ${error.message}`);
     }
 }
