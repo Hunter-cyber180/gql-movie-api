@@ -33,8 +33,16 @@ const user = async ({ id: _id }) => {
 }
 
 const deleteUser = async ({ id: _id }) => {
-    await adminValidator(context.req);
-    await UserModel.findOneAndDelete({ _id });
+    try {
+        await adminValidator(context.req);
+        const user = await UserModel.findOneAndDelete({ _id });
+        if (!user)
+            throw new Error("User not found!");
+
+        return { message: "User deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting user: ${error.message}`);
+    }
 }
 
 const registerUser = async (_, { input }) => {
