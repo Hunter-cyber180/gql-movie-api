@@ -7,9 +7,12 @@ const { adminValidator } = require("../../utils/auth");
 
 const categories = async () => {
     try {
+        // Query the database to find all categories
         const categories = await CategoryModel.find({});
+        // Return the retrieved categories array
         return categories;
     } catch (error) {
+        // If an error occurs, throw a new error with a descriptive message
         throw new Error(`Error fetching categories: ${error.message}`);
     }
 }
