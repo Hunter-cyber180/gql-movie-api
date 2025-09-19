@@ -51,23 +51,27 @@ const registerUser = async (_, { input }) => {
 }
 
 const loginUser = async (_, { input }) => {
-    const validateError = loginValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+    try {
+        const validateError = loginValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    const user = await UserModel.findOne({
-        $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
-    });
-    if (!user) throw new Error("Invalid credentials");
+        const user = await UserModel.findOne({
+            $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
+        });
+        if (!user) throw new Error("Invalid credentials");
 
-    const validPassword = await bcrypt.compare(input.password, user.password);
-    if (!validPassword) throw new Error("Invalid credentials");
+        const validPassword = await bcrypt.compare(input.password, user.password);
+        if (!validPassword) throw new Error("Invalid credentials");
 
-    const token = jwt.sign(
-        { id: user._id },
-        process.env.TOKEN_KEY,
-        { expiresIn: "2d" }
-    );
-    return { token, user };
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.TOKEN_KEY,
+            { expiresIn: "2d" }
+        );
+        return { token, user };
+    } catch (error) {
+        throw new Error(`Error in login user: ${error.message}`);
+    }
 }
 
 module.exports = { registerUser, loginUser, users, user, deleteUser };
