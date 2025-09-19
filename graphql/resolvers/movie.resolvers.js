@@ -106,8 +106,16 @@ const editMovie = async ({ id: _id }, { input }, context) => {
 }
 
 const deleteMovie = async ({ id: _id }) => {
-    await adminValidator(context.req);
-    await MovieModel.findOneAndDelete({ _id });
+    try {
+        await adminValidator(context.req);
+        const movie = await MovieModel.findOneAndDelete({ _id });
+        if (!movie)
+            throw new Error("Movie not found!");
+
+        return { message: "Movie deleted successfully" };
+    } catch (error) {
+        throw new Error(`Error deleting movie: ${error.message}`);
+    }
 }
 
 module.exports = {
