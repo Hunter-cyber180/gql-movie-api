@@ -17,14 +17,19 @@ const categories = async () => {
     }
 }
 
+// Fetches a single category by its ID
 const category = async ({ id: _id }) => {
     try {
+        // Find the category in the database using the provided ID
         const category = await CategoryModel.findOne({ _id });
+
+        // If no category is found, throw a "not found" error
         if (!category)
             throw new Error("Category not found");
 
         return category;
     } catch (error) {
+        // Catch any errors and throw a new error with a descriptive message
         throw new Error(`Error fetching category: ${error.message}`);
     }
 }
