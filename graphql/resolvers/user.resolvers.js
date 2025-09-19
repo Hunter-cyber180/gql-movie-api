@@ -20,7 +20,17 @@ const users = async () => {
     }
 }
 
-const user = async ({ id: _id }) => await UserModel.findOne({ _id });
+const user = async ({ id: _id }) => {
+    try {
+        const user = await UserModel.findOne({ _id });
+        if (!user)
+            throw new Error("User not found!");
+
+        return user;
+    } catch (error) {
+        throw new Error(`Error fetching user: ${error.message}`);
+    }
+}
 
 const deleteUser = async ({ id: _id }) => {
     await adminValidator(context.req);
