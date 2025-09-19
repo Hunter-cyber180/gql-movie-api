@@ -21,29 +21,33 @@ const deleteUser = async ({ id: _id }) => {
 }
 
 const registerUser = async (_, { input }) => {
-    const validateError = registerValidator(input)[0]?.message;
-    if (validateError) throw new Error(validateError);
+    try {
+        const validateError = registerValidator(input)[0]?.message;
+        if (validateError) throw new Error(validateError);
 
-    const existingUser = await UserModel.findOne({
-        $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
-    });
-    if (existingUser) throw new Error("User already exists!");
+        const existingUser = await UserModel.findOne({
+            $or: [{ email: input.email }, { phoneNumber: input.phoneNumber }]
+        });
+        if (existingUser) throw new Error("User already exists!");
 
-    const hashedPassword = await bcrypt.hash(input.password, 10);
-    const isFirstUser = (await UserModel.countDocuments()) === 0;
+        const hashedPassword = await bcrypt.hash(input.password, 10);
+        const isFirstUser = (await UserModel.countDocuments()) === 0;
 
-    const user = await UserModel.create({
-        ...input,
-        password: hashedPassword,
-        role: isFirstUser ? "ADMIN" : input.role
-    });
+        const user = await UserModel.create({
+            ...input,
+            password: hashedPassword,
+            role: isFirstUser ? "ADMIN" : input.role
+        });
 
-    const token = jwt.sign(
-        { id: user._id },
-        process.env.TOKEN_KEY,
-        { expiresIn: "2d" }
-    );
-    return { token, user };
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.TOKEN_KEY,
+            { expiresIn: "2d" }
+        );
+        return { token, user };
+    } catch (error) {
+        throw new Error(`Error in register user: ${error.message}`);
+    }
 }
 
 const loginUser = async (_, { input }) => {
