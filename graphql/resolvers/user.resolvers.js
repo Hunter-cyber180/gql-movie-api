@@ -11,7 +11,14 @@ const { registerValidator, loginValidator } = require(
 );
 const { adminValidator } = require("../../utils/auth");
 
-const users = async () => await UserModel.find({});
+const users = async () => {
+    try {
+        const users = await UserModel.find({});
+        return users;
+    } catch (error) {
+        throw new Error(`Error fetching users: ${error.message}`);
+    }
+}
 
 const user = async ({ id: _id }) => await UserModel.findOne({ _id });
 
