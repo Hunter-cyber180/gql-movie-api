@@ -78,15 +78,22 @@ const editCategory = async ({ id: _id }, { input }, context) => {
     }
 }
 
+// Deletes a category from the database by its ID
 const deleteCategory = async ({ id: _id }, args, context) => {
     try {
+        // Validate admin privileges before allowing deletion
         await adminValidator(context.req);
+
+        // Find the category by ID and delete it
         const category = await CategoryModel.findOneAndDelete({ _id });
+
+        // Check if category was found and deleted
         if (!category)
             throw new Error("Category not found");
 
         return { message: "Category deleted successfully" };
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error deleting category: ${error.message}`);
     }
 }
