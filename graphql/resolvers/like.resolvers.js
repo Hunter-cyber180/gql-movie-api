@@ -17,12 +17,19 @@ const likes = async () => {
     }
 }
 
+// Fetches a single like from the database by its ID
 const like = async ({ id: _id }) => {
     try {
+        // Find the like by its ID in the database
         const like = await LikeModel.findOne({ _id });
+
+        // Check if the like exists
         if (!like)
-            throw new Error("Like not found!")
+            throw new Error("Like not found!");
+
+        return like;
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error fetching like: ${error.message}`);
     }
 }
