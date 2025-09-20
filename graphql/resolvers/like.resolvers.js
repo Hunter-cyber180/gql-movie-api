@@ -54,14 +54,19 @@ const addLike = async (_, { input }, context) => {
     }
 };
 
+// Deletes a like from the database by its ID
 const deleteLike = async ({ id: _id }) => {
     try {
+        // Find the like by ID and delete it
         const like = await LikeModel.findOneAndDelete({ _id });
+
+        // Check if like was found and deleted
         if (!like)
             throw new Error("Like not found!");
 
         return { message: "Like deleted successfully" };
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error deleting like: ${error.message}`);
     }
 }
