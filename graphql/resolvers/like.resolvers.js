@@ -34,19 +34,25 @@ const like = async ({ id: _id }) => {
     }
 }
 
+// Creates a new like in the database
 const addLike = async (_, { input }, context) => {
     try {
         const { user, food } = input;
 
+        // Validate like input data
         const validateError = likeValidator(input)[0]?.message;
         if (validateError) throw new Error(validateError);
 
+        // Create a new like instance with the provided data
         const newLike = new LikeModel({ user, food });
+
+        // Save the new like to the database and return it
         return await newLike.save();
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error creating like: ${error.message}`);
     }
-}
+};
 
 const deleteLike = async ({ id: _id }) => {
     try {
