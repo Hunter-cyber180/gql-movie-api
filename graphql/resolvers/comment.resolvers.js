@@ -19,14 +19,19 @@ const comments = async () => {
     }
 }
 
+// Fetches a single comment from the database by its ID
 const comment = async ({ id: _id }) => {
     try {
+        // Find the comment by its ID in the database
         const comment = await CommentModel.findOne({ _id });
+
+        // Check if the comment exists
         if (!comment)
             throw new Error("Comment not found!");
 
         return comment;
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error fetching comment: ${error.message}`);
     }
 }
