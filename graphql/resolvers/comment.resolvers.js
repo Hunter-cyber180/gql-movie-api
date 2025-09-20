@@ -55,15 +55,22 @@ const addComment = async (_, { input }, context) => {
     }
 };
 
-const deleteComment = async ({ id: _id }) => {
+// Deletes a comment from the database by its ID
+const deleteComment = async ({ id: _id }, args, context) => {
     try {
+        // Validate admin privileges before allowing deletion
         await adminValidator(context.req);
-        const comment = CommentModel.findOneAndDelete({ _id });
+
+        // Find the comment by ID and delete it
+        const comment = await CommentModel.findOneAndDelete({ _id });
+
+        // Check if comment was found and deleted
         if (!comment)
             throw new Error("Comment not found!");
 
         return { message: "Comment deleted successfully" };
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error deleting comment: ${error.message}`);
     }
 }
