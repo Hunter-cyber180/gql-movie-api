@@ -5,11 +5,16 @@ const CommentModel = require("../../models/Comment");
 const { commentValidator } = require("../../utils/validators/comment.validate");
 const { adminValidator } = require("../../utils/auth");
 
+// Fetches all comments from the database
 const comments = async () => {
     try {
+        // Retrieve all comments from the database
         const comments = await CommentModel.find({});
+
+        // Return the fetched comments
         return comments;
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error fetching comments: ${error.message}`);
     }
 }
