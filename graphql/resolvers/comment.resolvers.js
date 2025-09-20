@@ -36,16 +36,21 @@ const comment = async ({ id: _id }) => {
     }
 }
 
+// Creates a new comment in the database
 const addComment = async (_, { input }, context) => {
     try {
         const { user, movie, body, likes, dislikes } = input;
 
+        // Validate comment input data
         const validateError = commentValidator(input)[0]?.message;
         if (validateError) throw new Error(validateError);
 
+        // Create a new comment instance with the provided data
         const newComment = new CommentModel({ user, movie, body, likes, dislikes });
+
         return await newComment.save();
     } catch (error) {
+        // Catch any errors and throw with descriptive message
         throw new Error(`Error creating comment: ${error.message}`);
     }
 };
